@@ -18,7 +18,8 @@
     "better-scroll": "^1.12.6",
     "fastclick": "^1.0.6",
     "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.2"
+    "stylus-loader": "^3.0.2",
+    "vue-awesome-swiper": "^2.6.7"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

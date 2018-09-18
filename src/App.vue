@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view/>
+    <keep-alive>
+      <router-view/>
+    </keep-alive>
     <tab-bar></tab-bar>
   </div>
 </template>
@@ -16,4 +18,5 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+
 </style>

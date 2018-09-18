@@ -1,0 +1,60 @@
+
+{
+    "swiper" : [{
+          "id": "0001",
+          "imgUrl": "https://img.alicdn.com/imgextra/i3/2053469401/O1CN012JJhs2zqgf868Bs-2053469401.png"
+        },{
+          "id": "0002",
+          "imgUrl": "https://img.alicdn.com/imgextra/i1/2508158775/TB2rFLkfgDD8KJjy0FdXXcjvXXa_!!2508158775.jpg"
+        },{
+          "id": "0003",
+          "imgUrl": "https://img.alicdn.com/imgextra/i2/2508158775/O1CN012Egzw5nJwNawcuJ_!!2508158775.jpg"
+        },{
+          "id": "0004",
+          "imgUrl": "https://img.alicdn.com/imgextra/i4/2508158775/O1CN012Egzw6u7GXF9Ev4_!!2508158775.jpg"
+        },{
+          "id": "0005",
+          "imgUrl": "https://img.alicdn.com/imgextra/i3/2508158775/O1CN012Egzw5YIEZAz6gN_!!2508158775.jpg"
+        }],
+    "iconList": [{
+      "id": "0001",
+      "imgUrl": "http://djzk.kiwifruits.cn/Theme/images/1.png",
+      "desc": "女装"
+    }, {
+      "id": "0002",
+      "imgUrl": "http://djzk.kiwifruits.cn/Theme/images/2.png",
+      "desc": "男装"
+    }, {
+      "id": "0003",
+      "imgUrl": "http://djzk.kiwifruits.cn/Theme/images/3.png",
+      "desc": "鞋包"
+    }, {
+      "id": "0004",
+      "imgUrl": "http://djzk.kiwifruits.cn/Theme/images/4.png",
+      "desc": "内衣"
+    }, {
+      "id": "0005",
+      "imgUrl": "http://djzk.kiwifruits.cn/Theme/images/5.png",
+      "desc": "母婴"
+    }, {
+      "id": "0006",
+      "imgUrl": "http://djzk.kiwifruits.cn/Theme/images/6.png",
+      "desc": "美妆"
+    }, {
+      "id": "0007",
+      "imgUrl": "http://djzk.kiwifruits.cn/Theme/images/7.png",
+      "desc": "配饰"
+    }, {
+      "id": "0008",
+      "imgUrl": "http://djzk.kiwifruits.cn/Theme/images/8.png",
+      "desc": "美食"
+    }, {
+      "id": "0009",
+      "imgUrl": "http://djzk.kiwifruits.cn/Theme/images/9.png",
+      "desc": "车品"
+    }, {
+      "id": "0010",
+      "imgUrl": "http://djzk.kiwifruits.cn/Theme/images/10.png",
+      "desc": "家电"
+    }]
+}

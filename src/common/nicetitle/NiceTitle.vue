@@ -34,9 +34,12 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+@import '~styles/common.styl'
     .nice-title
         text-align: center
         color: $RedColor
+        height: 1rem
+        line-height: 1rem
         .iconfont
             display: inline-block
             margin: 0 .2rem
