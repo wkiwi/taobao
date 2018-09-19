@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('./fonts/icomoon.eot?yywdgp');
-  src:  url('./fonts/icomoon.eot?yywdgp#iefix') format('embedded-opentype'),
-    url('./fonts/icomoon.ttf?yywdgp') format('truetype'),
-    url('./fonts/icomoon.woff?yywdgp') format('woff'),
-    url('./fonts/icomoon.svg?yywdgp#icomoon') format('svg');
+  src:  url('./fonts/icomoon.eot?qn24zv');
+  src:  url('./fonts/icomoon.eot?qn24zv#iefix') format('embedded-opentype'),
+    url('./fonts/icomoon.ttf?qn24zv') format('truetype'),
+    url('./fonts/icomoon.woff?qn24zv') format('woff'),
+    url('./fonts/icomoon.svg?qn24zv#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,6 +24,75 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-uniE902:before {
+  content: "\e902";
+}
+.icon-1:before {
+  content: "\e90b";
+}
+.icon-5:before {
+  content: "\e90c";
+}
+.icon-6:before {
+  content: "\e90d";
+}
+.icon-7:before {
+  content: "\e90e";
+}
+.icon-8:before {
+  content: "\e90f";
+}
+.icon-9:before {
+  content: "\e910";
+}
+.icon-10:before {
+  content: "\e911";
+}
+.icon-11:before {
+  content: "\e912";
+}
+.icon-_1:before {
+  content: "\e913";
+}
+.icon-12:before {
+  content: "\e914";
+}
+.icon-13:before {
+  content: "\e915";
+}
+.icon-14:before {
+  content: "\e916";
+}
+.icon-15:before {
+  content: "\e917";
+}
+.icon-16:before {
+  content: "\e918";
+}
+.icon-17:before {
+  content: "\e919";
+}
+.icon--T:before {
+  content: "\e91a";
+}
+.icon-18:before {
+  content: "\e91b";
+}
+.icon-2:before {
+  content: "\e91c";
+}
+.icon-3:before {
+  content: "\e91d";
+}
+.icon-4:before {
+  content: "\e91e";
+}
+.icon--:before {
+  content: "\e91f";
+}
+.icon--1:before {
+  content: "\e920";
+}
 .icon-nine_tab_left .path1:before {
   content: "\e900";
   color: rgb(0, 0, 0);
@@ -73,16 +142,4 @@
   margin-left: -3em;
   color: rgb(247, 42, 102);
   opacity: 0.2;
-}
-.icon-home3:before {
-  content: "\e902";
-}
-.icon-price-tag:before {
-  content: "\e935";
-}
-.icon-user:before {
-  content: "\e971";
-}
-.icon-stats-bars:before {
-  content: "\e99c";
 }

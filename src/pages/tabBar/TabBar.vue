@@ -3,25 +3,25 @@
         <div class="tabbar-wrapper">
             <router-link to="/" tag="div" class="tabbar-item">
                 <div class="wrapper">
-                    <i class="iconfont icon-home3"></i>
+                    <i class="iconfont icon-15"></i>
                     首页
                 </div>
             </router-link>
             <router-link to="/kuai9" tag="div" class="tabbar-item">
                 <div class="wrapper">
-                    <i class="iconfont icon-price-tag"></i>
+                    <i class="iconfont icon-uniE902"></i>
                     9块9
                 </div>
             </router-link>
             <router-link to="/classify" tag="div" class="tabbar-item">
                 <div class="wrapper">
-                    <i class="iconfont icon-stats-bars"></i>
+                    <i class="iconfont icon-6"></i>
                     分类
                 </div>
             </router-link>
             <router-link to="/user" tag="div" class="tabbar-item">
                 <div class="wrapper">
-                    <i class="iconfont icon-user"></i>
+                    <i class="iconfont icon-18"></i>
                     个人中心
                 </div>
             </router-link>

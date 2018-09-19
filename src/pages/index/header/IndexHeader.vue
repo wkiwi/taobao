@@ -2,7 +2,7 @@
     <div class="header">
         <div class="search-wrapper">
             <div class="icon-search">
-                <i class="iconfont icon-detail_search"></i>输入您需要的商品名称
+                <i class="iconfont icon-16"></i>输入您需要的商品名称
             </div>
         </div>
     </div>
@@ -35,7 +35,9 @@ export default {
                 font-size: .28rem
                 color: #ccc
                 text-align: left
-                text-indent: 1rem
+                text-indent: .6rem
                 background: #f7f7f7
                 border-radius: .6rem
+                .iconfont
+                    margin-right: .2rem
 </style>

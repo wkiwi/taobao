@@ -146,6 +146,7 @@ export default {
                                 padding-right: .1rem
                                 font-size: .2rem
                                 width: .8rem
+                                text-align: right
                                 ellipsis()
                     .desc
                         height: 1rem
