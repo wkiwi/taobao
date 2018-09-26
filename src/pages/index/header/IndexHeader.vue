@@ -1,10 +1,10 @@
 <template>
     <div class="header">
-        <div class="search-wrapper">
+        <router-link to="/search" tag="div" class="search-wrapper">
             <div class="icon-search">
                 <i class="iconfont icon-16"></i>输入您需要的商品名称
             </div>
-        </div>
+        </router-link>
     </div>
 </template>
 

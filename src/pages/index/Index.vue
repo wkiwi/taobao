@@ -11,10 +11,12 @@
               <div class="bottom-tip">我也是有底线的</div>
             </div>
         </div>
+        <tab-bar></tab-bar>
     </div>
 </template>
 
 <script>
+import TabBar from '../tabBar/TabBar'
 import NiceTitle from 'common/nicetitle/NiceTitle'
 import Swiper from './swiper/Swiper'
 import axios from 'axios'
@@ -44,7 +46,8 @@ export default {
     Icons,
     Goods,
     IndexHeader,
-    Banner
+    Banner,
+    TabBar
   },
   watch: {
       goodsList: function () {
@@ -85,7 +88,7 @@ export default {
         })
     },
     getTop100: function () {
-        axios.get('/api/Top100.json')
+        axios.get('http://openapi.qingtaoke.com/baokuan?app_key=OjRY3esp&v=1.0')
         .then(this.handleGitTop100Succ)  
     },
     handleGitTop100Succ: function (res) {

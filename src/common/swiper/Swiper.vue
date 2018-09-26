@@ -27,7 +27,7 @@ export default {
                 el: '.swiper-pagination'
           },
           loop: true,
-          autoplay: 3000,
+          autoplay:true,
           preventClicksPropagation: true // 阻止click冒泡。拖动Swiper时阻止click事件。
         }
       }

@@ -32,10 +32,12 @@
                 </li>
             </ul>
         </div>
+        <tab-bar></tab-bar>
     </div>
 </template>
 
 <script type="text/ecmascript-6">
+import TabBar from '../tabBar/TabBar'
 import NiceTitle from 'common/nicetitle/NiceTitle'
 export default {
     name: 'User',
@@ -45,7 +47,8 @@ export default {
         }
     },
     components: {
-        NiceTitle
+        NiceTitle,
+        TabBar
     }
 }
 </script>

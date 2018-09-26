@@ -24,10 +24,12 @@
                 </li>
             </ul>
         </div>
+        <tab-bar></tab-bar>
     </div>
 </template>
 
 <script type="text/ecmascript-6">
+import TabBar from '../tabBar/TabBar'
 import BScroll from 'better-scroll'
 import axios from 'axios'
 // import Bus from '@/assets/js/eventBus'
@@ -39,7 +41,7 @@ export default {
         }
     },
     components: {
-
+        TabBar
     },
     created () {
         this.getInfo()
@@ -86,8 +88,8 @@ export default {
             this.goods = data
             // DOM 更新了 操作dom时一定要在$nextTick里
             this.$nextTick(() => {
-                this._initScroll()
                 this._calculateHeight()
+                this._initScroll()
             })
         },
         _initScroll: function () {
@@ -105,10 +107,12 @@ export default {
         _calculateHeight: function () {
             const element = this.$refs['foods-wrapper']
             let foodList = element.getElementsByClassName('food-list-hook')
+            console.log(foodList)
             let height = 0
             this.listHeight.push(height)
             for (let i = 0; i < foodList.length; i++) {
                 let item = foodList[i]
+                console.log(item.clientHeight)
                 height += item.clientHeight
                 this.listHeight.push(height)
             } 

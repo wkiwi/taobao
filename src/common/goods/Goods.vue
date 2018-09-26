@@ -1,6 +1,6 @@
 <template>
     <div class="goods-list">
-        <div class="goods-item" v-for="(item,index) of goodslist" :key="index" >
+        <div class="goods-item" v-for="(item,index) of goodslist" :key="index" @click="detail(item,$event)">
             <div class="goods-item-wrapper">
                 <div class="icon">
                     <img class="img" :src="item.goods_pic" :alt="item.goods_short_title">
@@ -44,6 +44,15 @@ export default {
     },
     components: {
 
+    },
+    methods: {
+        detail (data, event) {
+            if (!event._constructed) {
+                return
+            }
+            console.log(data.seller_id)
+            this.$router.push({name: 'Detail', params: data})
+        }
     }
 }
 </script>
