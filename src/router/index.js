@@ -7,6 +7,7 @@ import User from '@/pages/user/User'
 import Detail from '@/pages/detail/Detail'
 import Search from '@/pages/search/Search'
 import SearchList from '@/pages/searchlist/SearchList'
+import Favorite from '@/pages/favorite/Favorite'
 Vue.use(Router)
 
 export default new Router({
@@ -15,37 +16,74 @@ export default new Router({
     {
       path: '/',
       name: 'Index',
-      component: Index
+      component: Index,
+      meta: {
+        keepAlive: true, 
+        isBack: false
+      }
     },
     {
       path: '/kuai9',
       name: 'Kuai9',
-      component: Kuai9
+      component: Kuai9,
+      meta: {
+        keepAlive: true, 
+        isBack: false
+      }
     },
     {
       path: '/classify',
       name: 'Classify',
-      component: Classify
+      component: Classify,
+      meta: {
+        keepAlive: true, 
+        isBack: false
+      }
     },
     {
       path: '/user',
       name: 'User',
-      component: User
+      component: User,
+      meta: {
+        keepAlive: true, 
+        isBack: false
+      }
     },
     {
       path: '/detail',
       name: 'Detail',
-      component: Detail
+      component: Detail,
+      meta: {
+        keepAlive: false, 
+        isBack: false
+      }
     },
     {
       path: '/search',
       name: 'Search',
-      component: Search
+      component: Search,
+      meta: {
+        keepAlive: true, 
+        isBack: false
+      }
     },
     {
-      path: '/searchlist/:key',
+      path: '/searchlist/:key/:cat',
       name: 'SearchList',
-      component: SearchList
+      component: SearchList,
+      meta: {
+        keepAlive: true, 
+        isBack: false
+      }
+    },
+    {
+      path: '/favorite',
+      name: 'Favorite',
+      component: Favorite,
+      meta: {
+        keepAlive: true, 
+        isBack: false
+      }
     }
   ],
   scrollBehavior (to, from, savedPosition) {

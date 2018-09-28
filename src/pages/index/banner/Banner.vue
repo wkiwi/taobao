@@ -6,7 +6,7 @@
         </div>
         <div class="banner-content" ref="pic-wrapper">
             <div class="wrapper" ref="banner-wrapper">
-                <div class="item" v-for="(item,index) of goodslist" :key="index" >
+                <div class="item" v-for="(item,index) of goodslist" :key="index" @click="detail(item,$event)">
                     <div class="item-wrapper">
                         <div class="icon">
                             <img :src="item.goods_pic" alt="" class="img">
@@ -78,6 +78,13 @@ export default {
                     this.scrollPic.refresh()
                 }
             }
+        },
+        detail (data, event) {
+            if (!event._constructed) {
+                return
+            }
+            console.log(data.seller_id)
+            this.$router.push({name: 'Detail', params: data})
         }
     }
 }

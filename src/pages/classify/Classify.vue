@@ -86,6 +86,13 @@ export default {
             const data = res.data
             console.log(data)
             this.goods = data
+            for (let i = 0; i < this.goods.length; i++) {
+                if (this.goods[i].foods) {
+                    for (let r = 0; r < this.goods[i].foods.length; r++) {
+                        this.goods[i].foods[r].icon = require('@/assets/images' + this.goods[i].foods[r].icon)
+                    }
+                }
+            }
             // DOM 更新了 操作dom时一定要在$nextTick里
             this.$nextTick(() => {
                 this._calculateHeight()
@@ -112,7 +119,6 @@ export default {
             this.listHeight.push(height)
             for (let i = 0; i < foodList.length; i++) {
                 let item = foodList[i]
-                console.log(item.clientHeight)
                 height += item.clientHeight
                 this.listHeight.push(height)
             } 
@@ -134,8 +140,9 @@ export default {
             if (!event._constructed) {
                 return
             }
-            this.selectedFood = food
+            this.selectedFood = food.key
             console.log(this.selectedFood)
+            this.$router.push({name: 'SearchList', params: {'key': this.selectedFood, 'cat': food.cat}})
         }
     }
     
@@ -195,13 +202,18 @@ export default {
                             margin-bottom: 0
                     .icon
                         width: 80%
-                        height: 80%
+                        height: 0
+                        padding-bottom: 80%
                         margin: 10%
                         overflow: hidden
+                        position: relative
                         .img
                             width: 100%
                             height: 100%
                             border-radius: 50%
+                            position: absolute 
+                            top: 0
+                            left: 0
                     .content 
                         margin: .2rem 0 
                         padding: 0 .24rem

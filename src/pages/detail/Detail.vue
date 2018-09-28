@@ -12,8 +12,9 @@
                     </div>
                     <div class="row">
                         <span class="goods-price"> 原价{{data.goods_price}}</span>
+                        <span class="favorite" :class="{'favorited':favorited}" @click="favorite">{{favorited ? '已收藏':'收藏'}} <i class="icon-14"></i></span>
                     </div>
-                    <div class="quan-info" @click="buy">
+                    <div class="quan-info" @click="buy" >
                         <div class="desc">
                             <div class="left">
                                 <div class="wrapper">
@@ -76,6 +77,7 @@ import DetailHeader from './header/Header'
 import DetailSwiper from './swiper/Swiper'
 import BScroll from 'better-scroll'
 import NiceTitle from 'common/nicetitle/NiceTitle'
+import {saveToLocal, loadFromLocal, deleteToLocal} from '@/assets/js/Store'
 export default {
     name: 'Detail',
     data () {
@@ -85,13 +87,16 @@ export default {
             name: '牙膏',
             swiperImgs: [],
             detailImg: [],
-            seller: {}
+            seller: {},
+            TKOUl: '',
+            favorited: false
         }
     },
     created () {
         this.data = this.$route.params
         this.getDetail()
         this.getDetailImg()
+        this.selectFavorite()
     },
     mounted () {
         console.log(this.data)
@@ -139,6 +144,7 @@ export default {
         },
         handlegetDetailImgfSucc: function (res) {
             let data = res.data
+            console.log(data)
             if (data.ret[0] === 'SUCCESS::接口调用成功') {
                 this.detailImg = data.data.images
             }
@@ -150,21 +156,41 @@ export default {
         handleBuySucc: function (res) {
             let data = res.data
             console.log(res)
-            // if (data.ret[0] === 'SUCCESS::接口调用成功') {
-            //     this.detailImg = data.data.images
-            // }
-            // var appUrl = data.url.replace('http://', '').replace('https://', '')
-            // var ifr = window.document.createElement('iframe')
-            //     ifr.src = 'taobao://' + appUrl
-            //     ifr.style.display = 'none'
-            //     document.body.appendChild(ifr)
-            alert(data.url)
+            this.tkl(data.url)
+        },
+        tkl: function (url) {
+            axios.get('http://api.kiwifruits.cn/djzk/tkl.php?TEXT=' + this.data.goods_title + '&URL=' + url)
+            .then(this.handleTklSucc) 
+        },
+        handleTklSucc: function (res) {
+            let data = res.data
+            this.TKOUl = data.data.model
+            console.log(data.data.model)
+        },
+        favorite: function () { // 收藏
+            if (!this.favorited) {
+                saveToLocal(this.data.goods_id, 'favorite', this.data)
+            } else {
+                this.deleteFavorate()
+            }
+            this.selectFavorite()
+        },
+        selectFavorite: function () { // 查询收藏
+            let fav = loadFromLocal(this.data.goods_id, 'favorite', '')
+            fav ? (this.favorited = true) : (this.favorited = false)
+        },
+        deleteFavorate: function () { // 取消该商品的收藏
+            deleteToLocal(this.data.goods_id, 'favorite', '')
         }
     },
     components: {
         DetailHeader,
         DetailSwiper,
         NiceTitle
+    },
+    beforeRouteLeave (to, from, next) {
+        to.meta.isBack = true
+        next()
     }
 }
 </script>
@@ -196,6 +222,10 @@ export default {
                 .goods-price
                     text-decoration:line-through
                     color: #888
+                .favorite
+                    float: right
+                .favorited
+                    color: $RedColor
             .quan-info
                 width: 100%
                 background: url('./goods_quan.png') no-repeat
@@ -291,8 +321,9 @@ export default {
                         text-align: center
                         .mini-text
                             display: inline-block
+                            font-size: .2rem
                             padding: .08rem
                             border-radius: .08rem
-                            height: .28rem
+                            height: .24rem
                         
 </style>

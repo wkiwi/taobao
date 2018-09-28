@@ -24,7 +24,8 @@ export default {
             goodsList: [],
             total: '',
             title: '',
-            sortnumber: 1
+            sortnumber: 1,
+            cat: 0
         }
     },
     watch: {
@@ -33,11 +34,12 @@ export default {
         }
     },
     created () {
-        this.key = this.$route.params.key
+        // this.key = this.$route.params.key
         // this.title = this.$route.params.title
         // console.log(this.title)
         console.log(this.key)
-        this.getSearchList(this.key)
+        console.log('created')
+        // this.getSearchList(this.key)
         Bus.$on('sortnumber', sortnumber => {
             if (sortnumber !== this.sortnumber) {
                 this.sortnumber = sortnumber 
@@ -77,6 +79,23 @@ export default {
     },
     mounted () {
         this._initScroll()
+    },
+    beforeRouteEnter (to, from, next) {
+        next(vm => {
+        if (from.path === '/detail') {
+            console.log('返回的的')
+            to.meta.isBack = true
+        } else {
+            console.log('新进入的')
+            vm.key = vm.$route.params.key
+            console.log(vm.$route.params.cat)
+            if (vm.$route.params.cat) {
+                vm.cat = vm.$route.params.cat
+            }
+            vm.goodsList = []
+            vm.getSearchList(vm.key)
+        }
+        })
     }
 }
 </script>

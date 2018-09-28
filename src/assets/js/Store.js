@@ -2,15 +2,33 @@ export function saveToLocal (id, key, value) {
     let djzk = window.localStorage.__djzk__
     if (!djzk) {
         djzk = {}
-        djzk[id] = {}
-        djzk[id][key] = value
+        djzk[key] = {}
+        djzk[key][id] = value
     } else {
         djzk = JSON.parse(djzk)
-        if (!djzk[id]) {
-            djzk[id] = {}
+        if (!djzk[key]) {
+            djzk[key] = {}
         }
     }
-    djzk[id][key] = value
+    djzk[key][id] = value
+    window.localStorage.__djzk__ = JSON.stringify(djzk)
+}
+export function deleteToLocal (id, key, def) {
+    let djzk = window.localStorage.__djzk__
+    if (!djzk) {
+        return def
+    }
+    djzk = JSON.parse(djzk)
+    if (!djzk[key]) {
+        return def
+    }
+    let obj = {}
+    for (let k in djzk[key]) {
+        if (id !== k) {
+            obj[k] = djzk[key][k]
+        }
+    }
+    djzk[key] = obj
     window.localStorage.__djzk__ = JSON.stringify(djzk)
 }
 export function loadFromLocal (id, key, def) {
@@ -18,11 +36,16 @@ export function loadFromLocal (id, key, def) {
     if (!djzk) {
         return def
     }
-    djzk = JSON.parse(djzk)[id]
+    djzk = JSON.parse(djzk)[key]
     if (!djzk) {
         return def
     }
-    let ret = djzk[key]
+    let ret
+    if (id) {
+        ret = djzk[id]
+    } else {
+        ret = djzk
+    }
     return ret || def
 }
 
@@ -34,7 +57,9 @@ export function saveKeyToLocal (key, value) {
         djzk[key] = [value]
     } else {
         djzk = JSON.parse(djzk)
-        // console.log(djzk[key])
+        if (!djzk[key]) {
+            djzk[key] = []
+        }
         if (djzk[key].indexOf(value) === -1) {
             if (djzk[key].length > 19) {
                 djzk[key].pop()

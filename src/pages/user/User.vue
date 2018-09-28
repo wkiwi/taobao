@@ -12,9 +12,9 @@
         <nice-title :type="1">个人中心</nice-title>
         <div class="list">
             <ul class="nav-list">
-                <li class="row border-bottom">
+                <router-link to="/favorite" tag="li" class="row border-bottom" >
                     <i  class="icon icon-14"></i> <span class="text">我的收藏</span> <i class="icon-3 right"></i>
-                </li>
+                </router-link>
                 <li class="row border-bottom">
                     <i  class="icon icon-8"></i> <span class="text">浏览记录</span> <i class="icon-3 right"></i>
                 </li>
