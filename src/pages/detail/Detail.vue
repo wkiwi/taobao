@@ -1,6 +1,12 @@
 <template>
     <div v-if="data">
-        <detail-header :title="data.goods_title"></detail-header>
+        <detail-header :title="data.goods_title" :scrollY="scrollY"></detail-header>
+        <fade>
+            <parameter :itemProperties="itemProperties" :listShow="PropertiesTip" v-show="PropertiesTip" v-on:hide="hideProperties"></parameter>
+        </fade>
+        <fade>
+            <div class="mask" v-show="PropertiesTip"  @click="hideProperties"></div>
+        </fade>
         <div class="detail" ref="detail">
             <div class="wrapper">
                 <detail-swiper :swiperimgs="swiperImgs" :sightName="name"></detail-swiper>
@@ -26,6 +32,11 @@
                         </div>
                     </div>
                     <div class="goods-introduce">{{data.goods_introduce}}</div>
+                </div>
+                <div class="split"></div>
+                <div class="item-properties" @click="showProperties">
+                    参数
+                    <i class="icon-3 to-right"></i>
                 </div>
                 <div class="split"></div>
                 <nice-title :type="0">店铺信息</nice-title>
@@ -75,8 +86,10 @@
 import axios from 'axios'
 import DetailHeader from './header/Header'
 import DetailSwiper from './swiper/Swiper'
+import Parameter from './parameter/Parameter'
 import BScroll from 'better-scroll'
 import NiceTitle from 'common/nicetitle/NiceTitle'
+import Fade from 'common/fade/FadeAnimation'
 import {saveToLocal, loadFromLocal, deleteToLocal} from '@/assets/js/Store'
 export default {
     name: 'Detail',
@@ -89,7 +102,11 @@ export default {
             detailImg: [],
             seller: {},
             TKOUl: '',
-            favorited: false
+            favorited: false,
+            itemProperties: [],
+            PropertiesTip: false,
+            scrollY: 0,
+            showAbs: true
         }
     },
     created () {
@@ -118,7 +135,12 @@ export default {
             if (!this.scroll) {
                     this.$nextTick(() => {
                         this.scroll = new BScroll(this.$refs.detail, {
-                            click: true
+                            click: true,
+                            probeType: 3
+                        })
+                        this.scroll.on('scroll', (pos) => {
+                            this.scrollY = Math.abs(Math.round(pos.y))
+                            this.scrollY > 200 ? (this.showAbs = false) : (this.showAbs = true)
                         })
                     })
             } else {
@@ -136,17 +158,36 @@ export default {
                 this.details = data.data
                 this.swiperImgs = data.data.item.images
                 this.seller = data.data.seller
+                let groupProps = data.data.props.groupProps[0]['基本信息']
+                let arr = []
+                for (let i = 0; i < groupProps.length; i++) {
+                    let obj = {}
+                    for (let k in groupProps[i]) {
+                        obj.name = k
+                        obj.value = groupProps[i][k]
+                        arr.push(obj)
+                    }
+                }
+                this.itemProperties = arr
+                console.log(this.itemProperties)
             }
         },
-        getDetailImg: function () {
-            axios.get('https://hws.m.taobao.com/cache/mtop.wdetail.getItemDescx/4.1/?data={%22item_num_id%22:%22' + this.data.goods_id + '%22}&type=json&dataType=json')
+        getDetailImg: function () { // 旧接口  https://hws.m.taobao.com/cache/mtop.wdetail.getItemDescx/4.1/?data={%22item_num_id%22:%22' + this.data.goods_id + '%22}&type=json&dataType=json
+            axios.get('http://h5api.m.taobao.com/h5/mtop.taobao.detail.getdesc/6.0/?data={%22id%22:%22' + this.data.goods_id + '%22}')
             .then(this.handlegetDetailImgfSucc)  
         },
         handlegetDetailImgfSucc: function (res) {
             let data = res.data
             console.log(data)
-            if (data.ret[0] === 'SUCCESS::接口调用成功') {
-                this.detailImg = data.data.images
+            if (data.ret[0] === 'SUCCESS::调用成功') {
+                // this.detailImg = data.data.images
+                // console.log(data.data.pcDescContent)
+                let str = data.data.pcDescContent
+                let arr = []
+                str.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, function (match, capture) {
+                    arr.push('http:' + capture)
+                })
+                this.detailImg = arr
             }
         },
         buy: function () {
@@ -181,12 +222,20 @@ export default {
         },
         deleteFavorate: function () { // 取消该商品的收藏
             deleteToLocal(this.data.goods_id, 'favorite', '')
+        },
+        showProperties: function () {
+            this.PropertiesTip = true
+        },
+        hideProperties: function () {
+            this.PropertiesTip = false
         }
     },
     components: {
         DetailHeader,
         DetailSwiper,
-        NiceTitle
+        NiceTitle,
+        Parameter,
+        Fade
     },
     beforeRouteLeave (to, from, next) {
         to.meta.isBack = true
@@ -197,6 +246,16 @@ export default {
 
 <style scoped lang="stylus">
 @import '~styles/common.styl'
+    .mask
+        position: fixed
+        top: 0
+        left: 0
+        bottom: 0
+        right: 0
+        width: 100%
+        height: 100%
+        background: rgba(7,17,27, .5)
+        z-index: 499
     .detail
         position: absolute 
         top: 0
@@ -289,7 +348,14 @@ export default {
             width: 100%
             .detail-img-wrapper
                 .img
-                    width: 100%    
+                    width: 100%  
+        .item-properties
+            padding: 0 .2rem
+            line-height: .6rem 
+            .to-right
+                float: right
+                line-height: .6rem
+                color: #ccc
         .shop-content
             padding: .2rem
             .shop-wrapper

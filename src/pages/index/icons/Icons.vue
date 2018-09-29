@@ -2,7 +2,7 @@
     <div class="icons">
         <swiper :options="swiperOption">
             <swiper-slide v-for="(page,index) of pages" :key="index">
-                <div class="icon" v-for="item of page" :key="item.id">
+                <div class="icon" v-for="(item,index) of page" :key="index" @click="selecteCat(item.id,item.desc)">
                     <div class="icon-img">
                         <img class="icon-img-content" :src="item.imgUrl">
                     </div>
@@ -27,7 +27,8 @@ export default {
                 },
                 autoplay: false,
                 preventClicksPropagation: true // 阻止click冒泡。拖动Swiper时阻止click事件。
-            }
+            },
+            cat: 0
         }
     },
      computed: {
@@ -41,6 +42,12 @@ export default {
                 pages[page].push(item)
             })
             return pages
+        }
+    },
+    methods: {
+        selecteCat: function (cat, title) {
+            this.cat = cat
+            this.$router.push({name: 'Cat', params: {'cat': cat, 'title': title}})
         }
     }
 }

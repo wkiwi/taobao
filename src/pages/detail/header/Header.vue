@@ -4,10 +4,10 @@
             <div class="iconfont icon-4"></div>
         </div>
         <div class="header-fixed" v-show="!showAbs" :style="opacityStyle">
-            <div @click="back">
-                <div class="iconfont icon-4"></div>
-            </div>
-            {{title}}
+            <div class="iconfont icon-4"  @click="back"></div>
+            <!-- {{title}} -->
+            <div class="tip "><span class="text" :class="{'selected':selected}">商品</span></div>
+            <div class="tip "><span class="text" :class="{'selected':!selected}">详情</span></div>
         </div>
     </div>
 </template>
@@ -17,8 +17,16 @@
 export default {
     name: 'DetailHeader',
     props: {
+        scrollY: {
+            type: Number
+        },
         title: {
             type: String
+        }
+    },
+    watch: {
+        scrollY: function () {
+            this.handleScroll()
         }
     },
     data () {
@@ -26,32 +34,30 @@ export default {
             showAbs: true,
             opacityStyle: {
                 opacity: 0
-            }
+            },
+            selected: true
         }
     },
     methods: {
         handleScroll: function () {
-            const top = document.documentElement.scrollTop
-            if (top > 60) {
-                let opacity = top / 140
+            if (this.scrollY > 100) {
+                let opacity = this.scrollY / 400
                 opacity = opacity > 1 ? 1 : opacity
-                this.opacityStyle = { opacity }
+                this.opacityStyle.opacity = opacity
                 this.showAbs = false
             } else {
                 this.showAbs = true
+            }
+            if (this.scrollY > 400) {
+                this.selected = false
+            } else {
+                this.selected = true
             }
         },
         back: function () {
             this.$router.go(-1)
         }
-    }/* ,
-    activated (){
-        window.addEventListener('scroll',this.handleScroll)
-    },
-    deactivated (){
-        window.removeEventListener('scroll',this.handleScroll)
-    } */
-
+    }
 }
 </script>
 
@@ -73,11 +79,15 @@ export default {
             background: rgba(0,0,0 .4)
             z-index: 100
             .icon-4
-                color: #fff
-                font-size: .4rem
+                width: .5rem
+                padding-left: .1rem
+                height: .6rem
                 line-height: .6rem
-                padding-left: .15rem
+                text-align: center
+                font-size: .4rem
+                color: #fff
         .header-fixed
+            display: flex
             z-index: 2
             position: fixed
             top: 0
@@ -85,17 +95,26 @@ export default {
             right: 0
             height: $headerHeight
             line-height: $headerHeight
-            text-align: center
             color: #fff
             background: $bgColor
             font-size: .32rem
             .icon-4
-                position: absolute
-                top: 0
-                left: 0
-                width: .64rem
+                width: .86rem
+                height: .86rem
+                line-height: .86rem
                 text-align: center
                 font-size: .4rem
                 color: #fff
+                flex: 0 0 .86rem
+            .tip
+                flex: 1
+                text-align: center
+                .text
+                    display: inline-block
+                    padding: 0 .6rem
+                    height: .78rem
+                    line-height: .78rem
+                    &.selected
+                        border-bottom: 2px solid #fff
 
 </style>

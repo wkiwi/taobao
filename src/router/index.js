@@ -8,6 +8,7 @@ import Detail from '@/pages/detail/Detail'
 import Search from '@/pages/search/Search'
 import SearchList from '@/pages/searchlist/SearchList'
 import Favorite from '@/pages/favorite/Favorite'
+import Cat from '@/pages/cat/Cat'
 Vue.use(Router)
 
 export default new Router({
@@ -71,6 +72,15 @@ export default new Router({
       path: '/searchlist/:key/:cat',
       name: 'SearchList',
       component: SearchList,
+      meta: {
+        keepAlive: true, 
+        isBack: false
+      }
+    },
+    {
+      path: '/cat/:cat',
+      name: 'Cat',
+      component: Cat,
       meta: {
         keepAlive: true, 
         isBack: false
