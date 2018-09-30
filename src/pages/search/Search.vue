@@ -63,7 +63,7 @@ export default {
         loadekey: function () {
             let keywords = loadKeyFromLocal('keywords', [])
             this.historyKey = keywords
-            console.log(keywords)
+            // console.log(keywords)
         },
         getHotKeyWords: function () {
             axios.get('http://openapi.qingtaoke.com/hot?app_key=OjRY3esp&v=1.0&t=1')

@@ -66,19 +66,19 @@ export default {
                 this.$nextTick(() => {
                     this.scroll = new BScroll(this.$refs.content, {
                         click: true
-                    })
+                    })  
                 })
         } else {
             this.scroll.refresh()
         }
     },
     getInfo: function () {
-        axios.get('/api/index.json')
+        axios.get('/taobaoapi/index.json')
         .then(this.handleGitInfoSucc)  
     },
     handleGitInfoSucc: function (res) {
         const data = res.data
-        console.log(data)
+        // console.log(data)
         this.swiperList = data.swiper
         this.iconlist = data.iconList
         // DOM 更新了 操作dom时一定要在$nextTick里
@@ -92,7 +92,7 @@ export default {
         .then(this.handleGitTop100Succ)  
     },
     handleGitTop100Succ: function (res) {
-        console.log(res.data)
+        // console.log(res.data)
         let data = res.data
         if (data.er_code === 10000) {
             this.goodsList = data.data
@@ -100,7 +100,7 @@ export default {
     }
   },
   mounted () {
-    console.log(this.$store.state)
+    // console.log(this.$store.state)
     this._initScroll()
   }
 }

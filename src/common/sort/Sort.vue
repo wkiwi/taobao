@@ -33,7 +33,7 @@ export default {
             } else if (this.type === 4) {
                 this.sort === true ? i = 4 : i = 7
             }
-            console.log(i)
+            // console.log(i)
             return i
         }
     },

@@ -65,7 +65,7 @@ export default {
                 let itemWidth = 130.02
                 let width = itemWidth * this.goodslist.length
                 this.$refs['banner-wrapper'].style.width = parseInt(width) + 'px'
-                console.log(width + 'px')
+                // console.log(width + 'px')
                 if (!this.scrollPic) {
                         this.$nextTick(() => {
                             this.scrollPic = new BScroll(this.$refs['pic-wrapper'], {
@@ -83,7 +83,7 @@ export default {
             if (!event._constructed) {
                 return
             }
-            console.log(data.seller_id)
+            // console.log(data.seller_id)
             this.$router.push({name: 'Detail', params: data})
         }
     }

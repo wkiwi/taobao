@@ -79,12 +79,12 @@ export default {
     },
     methods: {
         getInfo: function () {
-            axios.get('/api/goods.json')
+            axios.get('/taobaoapi/goods.json')
             .then(this.handleGitInfoSucc)  
         },
         handleGitInfoSucc: function (res) {
             const data = res.data
-            console.log(data)
+            // console.log(data)
             this.goods = data
             for (let i = 0; i < this.goods.length; i++) {
                 if (this.goods[i].foods) {
@@ -114,7 +114,7 @@ export default {
         _calculateHeight: function () {
             const element = this.$refs['foods-wrapper']
             let foodList = element.getElementsByClassName('food-list-hook')
-            console.log(foodList)
+            // console.log(foodList)
             let height = 0
             this.listHeight.push(height)
             for (let i = 0; i < foodList.length; i++) {
@@ -122,7 +122,7 @@ export default {
                 height += item.clientHeight
                 this.listHeight.push(height)
             } 
-            console.log(this.listHeight)
+            // console.log(this.listHeight)
         },
         selectMenu: function (index, event) {
             // better-scroll 可以监听到此事件，浏览器原生不能监听到  防止pc端出现两次点击
@@ -141,7 +141,7 @@ export default {
                 return
             }
             this.selectedFood = food.key
-            console.log(this.selectedFood)
+            // console.log(this.selectedFood)
             this.$router.push({name: 'SearchList', params: {'key': this.selectedFood, 'cat': food.cat}})
         }
     }

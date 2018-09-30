@@ -32,12 +32,12 @@ export default {
             this.$nextTick(() => {
                 let ul = this.$refs['menu-ul']
                 let lis = ul.getElementsByTagName('li') 
-                console.log(lis)
+                // console.log(lis)
                 let width = 0
                 for (let i = 0; i < lis.length; i++) {
                     width += lis[i].clientWidth
                 }
-                console.log(width)
+                // console.log(width)
                 ul.style.width = parseInt(width) + 'px'
                 if (!this.scrollTab) {
                         this.scrollTab = new BScroll(this.$refs['menu-wrapper'], {
@@ -56,7 +56,7 @@ export default {
                 return
             }
             this.number = index
-            console.log(cat)
+            // console.log(cat)
             Bus.$emit('cat', cat)
         }
     }

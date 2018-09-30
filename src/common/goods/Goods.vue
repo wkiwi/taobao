@@ -3,7 +3,7 @@
         <div class="goods-item" v-for="(item,index) of goodslist" :key="index" @click="detail(item,$event)">
             <div class="goods-item-wrapper">
                 <div class="icon">
-                    <img class="img" :src="item.goods_pic" :alt="item.goods_short_title">
+                    <img class="img" v-lazy="item.goods_pic" src="" :alt="item.goods_short_title">
                 </div>
                 <div class="desc">
                     <h1 class="title">{{item.goods_short_title}}</h1>
@@ -50,7 +50,7 @@ export default {
             if (!event._constructed) {
                 return
             }
-            console.log(data.seller_id)
+            // console.log(data.seller_id)
             this.$router.push({name: 'Detail', params: data})
         }
     }

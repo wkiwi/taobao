@@ -86,7 +86,7 @@ export default {
                 arr.push(fav[k])
             }
             this.goodsList = arr
-            console.log(this.goodsList)
+            // console.log(this.goodsList)
         },
         deleteFavorate: function (id) { // 删除该商品的收藏
             deleteToLocal(id, 'favorite', '')
@@ -107,10 +107,10 @@ export default {
     beforeRouteEnter (to, from, next) {
         next(vm => {
         if (from.path === '/detail') {
-                console.log('返回的的')
+                // console.log('返回的的')
                 to.meta.isBack = true
             } else {
-                console.log('新进入的')
+                // console.log('新进入的')
                 vm.selectFavorite()
             }
         })

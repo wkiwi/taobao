@@ -23,14 +23,6 @@ export default {
             type: Boolean
         }
     },
-    created () {
-        // this._initScroll()
-    },
-    data () {
-        return {
-
-        }
-    },
     watch: {
         listShow: function () {
             if (!this.scroll) {
@@ -46,7 +38,6 @@ export default {
     },
     methods: {
         _initScroll () {
-            console.log(123)
             if (!this.scroll) {
                     this.$nextTick(() => {
                         this.scroll = new BScroll(this.$refs.parameter, {

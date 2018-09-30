@@ -5,7 +5,13 @@
             <parameter :itemProperties="itemProperties" :listShow="PropertiesTip" v-show="PropertiesTip" v-on:hide="hideProperties"></parameter>
         </fade>
         <fade>
-            <div class="mask" v-show="PropertiesTip"  @click="hideProperties"></div>
+            <div class="mask" v-show="PropertiesTip"  @click="hideProperties" ></div>
+        </fade>
+        <fade>
+            <tkl-pop :tkl="TKOUl" v-show="tklMask" v-on:tklhide="hideTklMask"></tkl-pop>
+        </fade>
+        <fade>
+            <div class="mask" v-show="tklMask"  @click="hideTklMask"></div>
         </fade>
         <div class="detail" ref="detail">
             <div class="wrapper">
@@ -87,6 +93,7 @@ import axios from 'axios'
 import DetailHeader from './header/Header'
 import DetailSwiper from './swiper/Swiper'
 import Parameter from './parameter/Parameter'
+import TklPop from './tklpop/TklPop'
 import BScroll from 'better-scroll'
 import NiceTitle from 'common/nicetitle/NiceTitle'
 import Fade from 'common/fade/FadeAnimation'
@@ -106,7 +113,8 @@ export default {
             itemProperties: [],
             PropertiesTip: false,
             scrollY: 0,
-            showAbs: true
+            showAbs: true,
+            tklMask: false
         }
     },
     created () {
@@ -116,7 +124,7 @@ export default {
         this.selectFavorite()
     },
     mounted () {
-        console.log(this.data)
+        // console.log(this.data)
         this._initScroll()
     },
     filters: {
@@ -152,7 +160,7 @@ export default {
             .then(this.handlegetDetailSucc)  
         },
         handlegetDetailSucc: function (res) {
-            console.log(res.data)
+            // console.log(res.data)
             let data = res.data
             if (data.ret[0] === 'SUCCESS::调用成功') {
                 this.details = data.data
@@ -169,7 +177,7 @@ export default {
                     }
                 }
                 this.itemProperties = arr
-                console.log(this.itemProperties)
+                // console.log(this.itemProperties)
             }
         },
         getDetailImg: function () { // 旧接口  https://hws.m.taobao.com/cache/mtop.wdetail.getItemDescx/4.1/?data={%22item_num_id%22:%22' + this.data.goods_id + '%22}&type=json&dataType=json
@@ -178,7 +186,7 @@ export default {
         },
         handlegetDetailImgfSucc: function (res) {
             let data = res.data
-            console.log(data)
+            // console.log(data)
             if (data.ret[0] === 'SUCCESS::调用成功') {
                 // this.detailImg = data.data.images
                 // console.log(data.data.pcDescContent)
@@ -191,12 +199,16 @@ export default {
             }
         },
         buy: function () {
-            axios.get('http://api.kiwifruits.cn/djzk/heightMoney.php?id=' + this.data.goods_id)
-            .then(this.handleBuySucc) 
+            if (!this.TKOUl) { // 二次点击直接显示不请求
+                axios.get('http://api.kiwifruits.cn/djzk/heightMoney.php?id=' + this.data.goods_id)
+                .then(this.handleBuySucc) 
+            } else {
+                this.tklMask = true
+            }
         },
         handleBuySucc: function (res) {
             let data = res.data
-            console.log(res)
+            // console.log(res)
             this.tkl(data.url)
         },
         tkl: function (url) {
@@ -205,8 +217,9 @@ export default {
         },
         handleTklSucc: function (res) {
             let data = res.data
-            this.TKOUl = data.data.model
-            console.log(data.data.model)
+            this.TKOUl = '复制框内整段文字，打开【手淘APP】即可领券购买。' + data.data.model
+            this.tklMask = true
+            // console.log(data.data.model)
         },
         favorite: function () { // 收藏
             if (!this.favorited) {
@@ -228,6 +241,9 @@ export default {
         },
         hideProperties: function () {
             this.PropertiesTip = false
+        },
+        hideTklMask: function () {
+            this.tklMask = false
         }
     },
     components: {
@@ -235,7 +251,8 @@ export default {
         DetailSwiper,
         NiceTitle,
         Parameter,
-        Fade
+        Fade,
+        TklPop
     },
     beforeRouteLeave (to, from, next) {
         to.meta.isBack = true
