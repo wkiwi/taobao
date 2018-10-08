@@ -14,7 +14,7 @@ module.exports = {
       '/taobaoapi':{
         target:'http://localhost:8080',
         pathRewrite:{
-          '^/api':'/static'
+          '^/taobaoapi':'/static'
         }
       }
     },
