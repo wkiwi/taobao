@@ -6,9 +6,11 @@
               <swiper :list="swiperList"></swiper>
               <icons :list="iconlist"></icons>
               <banner :goodslist="bannerList"></banner>
-              <nice-title :type="1">每日精选</nice-title>
-              <goods :goodslist="goodsList"></goods>
-              <div class="bottom-tip">我也是有底线的</div>
+              <div v-if="goodsList.length>0">
+                <nice-title :type="1">每日精选</nice-title>
+                <goods :goodslist="goodsList"></goods>
+                <div class="bottom-tip">我也是有底线的</div>
+              </div>
             </div>
         </div>
         <tab-bar></tab-bar>

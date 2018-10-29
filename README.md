@@ -16,8 +16,19 @@ npm run build
 
 # build for production and view the bundle analyzer report
 npm run build --report
-```
 
+# 生成挂架屏json
+webpack --config ./webpack.skeleton.conf.js
+
+# 骨架屏注入
+node skeleton.js
+
+#注意，作为模板的html文件，需要在被写入内容的位置添加<!--vue-ssr-outlet-->占位符，本例子在div#app里写入：
+
+<div id="app">
+ <!--vue-ssr-outlet-->
+</div>
+```
 # 效果演示
 
 [查看demo请戳这里](http://index.kiwifruits.cn/taobao/)（请用chrome手机模式预览，配置网络浏览器）
