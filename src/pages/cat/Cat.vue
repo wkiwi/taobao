@@ -80,7 +80,7 @@ export default {
             }
         },
         getSearchList: function (key) {
-            axios.get('http://openapi.qingtaoke.com/qingsoulist?app_key=OjRY3esp&v=1.0&sort=' + this.sortnumber + '&cat=' + this.cat + '&page=' + this.page)
+            axios.get(process.env.API_ROOT + '/qingsoulist?app_key=OjRY3esp&v=1.0&sort=' + this.sortnumber + '&cat=' + this.cat + '&page=' + this.page + '&min_price=0&max_price=10000000&new=0&is_ju=0&is_ali=0&is_tqg=0')
             .then(this.handlegetSearchListSucc)  
         },
         handlegetSearchListSucc: function (res) {

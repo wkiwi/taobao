@@ -77,7 +77,7 @@ export default {
             }
         },
         getSearchList: function (key) {
-            axios.get('http://openapi.qingtaoke.com/search?s_type=1&key_word=' + key + '&app_key=OjRY3esp&page=1&v=1.0&sort=' + this.sortnumber + '&page=' + this.page)
+            axios.get(process.env.API_ROOT + '/search?v=1.0&s_type=1&app_key=OjRY3esp&key_word=' + key + '&sort=' + this.sortnumber + '&page=' + this.page + '&cat=0&min_price=0&max_price=10000000&is_ju=0&is_tqg=0')
             .then(this.handlegetSearchListSucc)  
         },
         handlegetSearchListSucc: function (res) {

@@ -39,8 +39,9 @@ export default {
     }
   },
   created () {
-        this.getInfo()
-        this.getTop100()
+    console.log(process.env.API_ROOT)
+    this.getInfo()
+    this.getTop100()
   },
   components: {
     NiceTitle,
@@ -90,7 +91,7 @@ export default {
         })
     },
     getTop100: function () {
-        axios.get('http://openapi.qingtaoke.com/baokuan?app_key=OjRY3esp&v=1.0')
+        axios.get(process.env.API_ROOT + '/baokuan?app_key=OjRY3esp&v=1.0')
         .then(this.handleGitTop100Succ)  
     },
     handleGitTop100Succ: function (res) {

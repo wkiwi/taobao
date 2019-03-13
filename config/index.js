@@ -13,6 +13,7 @@ module.exports = {
     proxyTable: {
       '/taobaoapi':{
         target:'http://localhost:8080',
+        changeOrigin: true,  //是否跨域
         pathRewrite:{
           '^/taobaoapi':'/static'
         }

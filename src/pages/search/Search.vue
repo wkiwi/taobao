@@ -66,7 +66,7 @@ export default {
             // console.log(keywords)
         },
         getHotKeyWords: function () {
-            axios.get('http://openapi.qingtaoke.com/hot?app_key=OjRY3esp&v=1.0&t=1')
+            axios.get(process.env.API_ROOT + '/hot?app_key=OjRY3esp&v=1.0&t=1')
             .then(this.handlegetHotKeyWordsSucc)  
         },
         handlegetHotKeyWordsSucc: function (res) {

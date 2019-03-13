@@ -200,20 +200,11 @@ export default {
         },
         buy: function () {
             if (!this.TKOUl) { // 二次点击直接显示不请求
-                axios.get('http://api.kiwifruits.cn/djzk/heightMoney.php?id=' + this.data.goods_id)
-                .then(this.handleBuySucc) 
+                axios.get('http://open.kiwifruits.cn/public/index.php/api/v1/product/hmoney/tkl?item_id=' + this.data.goods_id + '&title=' + this.data.goods_title)
+                .then(this.handleTklSucc) 
             } else {
                 this.tklMask = true
             }
-        },
-        handleBuySucc: function (res) {
-            let data = res.data
-            // console.log(res)
-            this.tkl(data.url)
-        },
-        tkl: function (url) {
-            axios.get('http://api.kiwifruits.cn/djzk/tkl.php?TEXT=' + this.data.goods_title + '&URL=' + url)
-            .then(this.handleTklSucc) 
         },
         handleTklSucc: function (res) {
             let data = res.data
