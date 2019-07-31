@@ -69,7 +69,7 @@ export default {
                 this.$nextTick(() => {
                     this.scroll = new BScroll(this.$refs.content, {
                         click: true
-                    })  
+                    })
                 })
         } else {
             this.scroll.refresh()
@@ -77,7 +77,7 @@ export default {
     },
     getInfo: function () {
         axios.get('/taobaoapi/index.json')
-        .then(this.handleGitInfoSucc)  
+        .then(this.handleGitInfoSucc)
     },
     handleGitInfoSucc: function (res) {
         const data = res.data
@@ -92,7 +92,7 @@ export default {
     },
     getTop100: function () {
         axios.get(process.env.API_ROOT + '/baokuan?app_key=OjRY3esp&v=1.0')
-        .then(this.handleGitTop100Succ)  
+        .then(this.handleGitTop100Succ)
     },
     handleGitTop100Succ: function (res) {
         // console.log(res.data)
@@ -115,12 +115,12 @@ export default {
         width: 100%
         top: .9rem
         bottom: .2rem
-        left: 0   
+        left: 0
         overflow: hidden
         .bottom-tip
             height: .8rem
             line-height: .8rem
             text-align: center
             font-size: .2rem
-            color: #888 
+            color: #888
 </style>
